@@ -12,7 +12,16 @@ include_recipe 'jenkins::java'
 include_recipe 'jenkins::master'
 
 # Install any required plugins and setup auth.
-include_recipe 'jenkins-chef-dsl::plugins'
+unless node['plugins_installed']
+  ruby_block 'set 1st Run node attributes' do
+    block do
+      node.normal['plugins_installed'] = true
+      node.save
+    end
+  end
+  include_recipe 'jenkins-chef-dsl::plugins'
+end
+
 include_recipe 'jenkins-chef-dsl::auth'
 
 # Setup .gitconfig, needed on first chef

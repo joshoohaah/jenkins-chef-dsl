@@ -19,7 +19,7 @@ package 'git'
 %w(git credentials ssh-credentials git-client scm-api github github-api github-oauth mailer).each do |plugin|
   jenkins_plugin plugin do
     action :install
-    notifies :create, "ruby_block[jenkins_restart_flag]", :immediately
+    # notifies :create, "ruby_block[jenkins_restart_flag]", :immediately
   end
 end
 
@@ -69,6 +69,6 @@ ruby_block "jenkins_restart_flag" do
   action :nothing
 end
 
-jenkins_command 'restart' do
+jenkins_command 'safe-restart' do
   only_if { restart_required }
 end

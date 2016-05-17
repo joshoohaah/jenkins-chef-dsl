@@ -33,3 +33,4 @@ default['jenkins']['master']['install_method'] = 'package'
 
 # Install chefdk?
 default['jenkins-chef']['chefdk'] = true
+default['chef_dk']['version'] = 'latest'
