@@ -17,9 +17,8 @@ restart_required = false
 #  Credit: https://github.com/JacksonRiver/chef-jr-jenkins/blob/master/recipes/plugins.rb#L13
 package 'git'
 %w(git credentials ssh-credentials git-client scm-api github github-api github-oauth mailer).each do |plugin|
-  plugin, version = plugin.split('=')
   jenkins_plugin plugin do
-    version version if version
+    action :install
     notifies :create, "ruby_block[jenkins_restart_flag]", :immediately
   end
 end

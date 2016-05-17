@@ -1,5 +1,8 @@
 driver:
   name: vagrant
+  http_proxy: <%= ENV['http_proxy'] %>
+  https_proxy: <%= ENV['http_proxy'] %>
+  no_proxy: <%= ENV['no_proxy'] %>
   synced_folders:
     - ["seedjob/", "/opt/seedjob"]
   customize:
@@ -21,11 +24,11 @@ platforms:
       - jenkins-chef-dsl::build-jdks
       - apt::default
       - jenkins::java
-  - name: centos-6.6
+  - name: bento/centos-6.7
     run_list:
       - yum::default
       - jenkins::java
-  - name: centos-7.0
+  - name: bento/centos-7.1
     run_list:
       - yum::default
       - jenkins::java
@@ -33,6 +36,9 @@ platforms:
 provisioner:
     name: chef_zero
     require_chef_omnibus: true
+    http_proxy: <%= ENV['http_proxy'] %>
+    https_proxy: <%= ENV['http_proxy'] %>
+    no_proxy: <%= ENV['no_proxy'] %>
 
 suites:
   - name: jenkins-chef-dsl
