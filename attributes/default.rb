@@ -20,7 +20,16 @@ default['jenkins-chef']['git']['email'] = 'jenkins@example.com'
 default['jenkins-chef']['ruby-manager'] = 'rvm' #eg: rvm. TODO: Rbenv
 
 # Oracle JDKs
-default['java']['oracle']['accept_oracle_download_terms'] = true
+# default['java']['oracle']['accept_oracle_download_terms'] = true
+default['java']['install_flavor']              = 'openjdk'
+default['java']['jdk_version']                 = '7'
+default['java']['accept_license_agreement'] = true
+default['java']['set_default']                 = true
+
+default['jenkins']['port'] = 8080
+override['jenkins']['master']['version'] = '1.658-1.1'
+
+default['jenkins']['master']['install_method'] = 'package'
 
 # Install chefdk?
 default['jenkins-chef']['chefdk'] = true
